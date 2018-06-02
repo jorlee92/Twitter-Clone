@@ -7,7 +7,7 @@ var bodyParser = require('body-parser')
 
 let app = express();
 /* Passport Setup */
-app.use(require('express-session')({ secret: 'random string', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: 'randomized string', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -15,7 +15,7 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded()) //Allows us to take data from forms.
 
 /* MONGODB SETUP */
-var uri ="mongodb://localhost:27017/twitter-clone";
+var uri = process.env.MONGODB_URL;
 mongoose.connect(uri)
 .then(() => {
     console.log('Connected to MongoDB');
